@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 import SplashScreen from 'react-native-splash-screen';
+import App from './app';
 
 const PhotoSharingApp = () =>{
     React.useEffect(() => {
@@ -11,9 +12,7 @@ const PhotoSharingApp = () =>{
     }, [])
 
     return (
-        <View>
-            <Text>hi</Text>
-        </View>
+        <App />
     )
 }
 
