@@ -35,7 +35,7 @@ const Fashion = () => {
             <FlatList
                 data={data}
                 numColumns={Config.num_column}
-                renderItem={ImageLoader}
+                renderItem={(props) => <ImageLoader {...props} />}
                 keyExtractor={item => item.name}
             />
         </View>
