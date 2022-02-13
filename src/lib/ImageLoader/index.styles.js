@@ -13,6 +13,11 @@ const useStyle = () => {
             height: CONTAINER_HEIGHT,
             width: CONTAINER_HEIGHT,
         },
+        img_wrapper: {
+            backgroundColor: '#e6e6e6',
+            height: IMG_SIZE,
+            width: IMG_SIZE,
+        },
         img: {
             height: IMG_SIZE,
             width: IMG_SIZE,

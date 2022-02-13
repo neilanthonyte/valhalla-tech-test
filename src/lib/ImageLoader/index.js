@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import useStyle from './index.styles';
 
 import DownloadBtn from '../DownloadBtn';
@@ -12,10 +12,12 @@ const ImageLoader = (props) => {
 
     return (
         <TouchableOpacity style={Style.container} activeOpacity={0.9} onPress={() => setShowBtn(!showBtn)}>
-            <Image 
-                source={{uri: item.url}}
-                style={Style.img}
-            />
+            <View style={Style.img_wrapper}>
+                <Image 
+                    source={{uri: item.url}}
+                    style={Style.img}
+                />
+            </View>
 
             {
                 showBtn ? (

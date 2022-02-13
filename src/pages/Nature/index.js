@@ -4,12 +4,25 @@ import useStyle from './index.styles';
 
 import ImageLoader from '../../lib/ImageLoader';
 import Config from '../../config.json';
-import {useQuery} from 'react-query';
+import {useInfiniteQuery} from 'react-query';
 import {fetchList} from './hooks';
+import _ from 'underscore';
 
 const Nature = () => {
     const Style = useStyle();
-    const {isLoading, isError, data, error, refetch} = useQuery(['NATURE_DATA', 'nature'], fetchList)
+    const {isLoading, isError, data, error, isFetching, refetch, fetchNextPage} = useInfiniteQuery(
+        ['nature'], 
+        fetchList, 
+        {
+            getNextPageParam: (lastPage, pages) => {
+                let nextPage = _.flatten(pages).length / 3;
+
+                return nextPage + 1;
+            },
+            staleTime: Infinity,
+            cacheTime: Infinity
+        }
+    );
 
     if(isError) {
         return (
@@ -30,14 +43,26 @@ const Nature = () => {
         )
     }
 
+    const list = _.flatten(data.pages);
+
     return (
         <View style={Style.container}>
             <FlatList
-                data={data}
+                data={list}
                 numColumns={Config.num_column}
                 renderItem={(props) => <ImageLoader {...props} />}
                 keyExtractor={item => item.name}
             />
+
+            {
+                isFetching ? (
+                    <ActivityIndicator size="large" color="#325ca8" />
+                ) : (
+                    <TouchableOpacity style={Style.load_more_btn} onPress={fetchNextPage}>
+                        <Text style={Style.load_more_label}>load more</Text>
+                    </TouchableOpacity>
+                )
+            }
         </View>
     )
 }

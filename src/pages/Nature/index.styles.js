@@ -20,6 +20,12 @@ const useStyle = () => {
         },
         try_again_label: {
             color: '#fff',
+        },
+        load_more_btn: {
+            padding: 10,
+        },
+        load_more_label: {
+            fontWeight: 'bold'
         }
     });
 }
