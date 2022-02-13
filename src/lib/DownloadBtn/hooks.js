@@ -1,7 +1,7 @@
 import {Alert, Platform, Linking} from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
-import {updateState, getStates, getState} from 'my-react-global-states';
+import {updateState} from 'my-react-global-states';
 
 let pCount = 0;
 
