@@ -13,7 +13,6 @@ const useStyle = (index) => {
             alignItems: 'center',
             height: CONTAINER_HEIGHT,
             width: CONTAINER_HEIGHT,
-            
         },
         img: {
             height: IMG_SIZE,
