@@ -1,19 +1,15 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Pages from './pages';
+import {View} from 'react-native';
+import Navs from './navs';
+import DownloadProgress from './lib/DownloadProgress';
 
-const Tab = createMaterialTopTabNavigator();
-
+// components that need to render once are added here
 const App = () => {
     return (
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen name="Nature" component={Pages.Nature} />
-                <Tab.Screen name="Architecture" component={Pages.Architecture} />
-                <Tab.Screen name="Fashion" component={Pages.Fashion} />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <View style={{flex: 1}}>
+            <Navs />
+            <DownloadProgress />
+        </View>
     )
 }
 

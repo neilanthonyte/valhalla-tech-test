@@ -20,6 +20,7 @@ const ImageLoader = (props) => {
             {
                 showBtn ? (
                     <DownloadBtn {...{
+                        imgURL: item.url,
                         width: Style.img.width,
                         height: Style.img.height
                     }} />
