@@ -1,4 +1,4 @@
 {
     "num_column": 2,
-    "api_url": "http://localhost:8888/images?category="
+    "host": "https://valhall-tech-test.herokuapp.com"
 }

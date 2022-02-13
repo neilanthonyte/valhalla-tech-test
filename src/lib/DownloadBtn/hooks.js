@@ -1,14 +1,14 @@
-import {Alert, Platform} from 'react-native';
+import {Alert, Platform, Linking} from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import {updateState, getStates, getState} from 'my-react-global-states';
 
 const configOptions = Platform.select({
     ios: {
-      fileCache: true,
       notification: true,
+      path: RNFetchBlob.fs.dirs.DocumentDir
     },
     android: {
-        fileCache: true,
+        path: RNFetchBlob.fs.dirs.PictureDir,
         addAndroidDownloads: {
             useDownloadManager: true,
             mediaScannable: true,
@@ -35,6 +35,16 @@ const runProgress = (limit, payload = null) => {
                 updateState('show_download_bar', false, true);
                 updateState('download_progress', 0, true);
                 pCount = 0;
+
+                setTimeout(() => {
+                    Alert.alert(
+                        "Download Success",
+                        `${payload.fileName} has been successfully downloaded and saved under \n\n${payload.location}`,
+                        [
+                            { text: "OK", onPress: () => {} }
+                        ]
+                    );
+                }, 500)
             }
             
             return 'done';
@@ -44,10 +54,26 @@ const runProgress = (limit, payload = null) => {
 
 export const onDownload = async (downloadURL) => {
     try {
-        updateState('show_download_bar', true, true);
-        runProgress(50); // run a fake initial progress
-        const res = await downloadImg(downloadURL);
-        runProgress(100, res); // if download success continue the progress to 100%
+        if(Platform.OS === 'ios') {
+            updateState('show_download_bar', true, true);
+            runProgress(50); // run a fake initial progress
+            const res = await downloadImg(downloadURL);
+            const splitUrl = downloadURL.split('/');
+            const fileName = splitUrl[splitUrl.length - 1];
+
+            runProgress(100, {...res, fileName}); // if download success continue the progress to 100%
+        } else {
+            console.log(RNFetchBlob.fs.dirs.DocumentDir);
+            // const res = await downloadImg(downloadURL);
+            // console.log(res);
+            // Alert.alert(
+            //     "Download Success",
+            //     `${payload.fileName} has been successfully downloaded and saved under \n\n${payload.location}`,
+            //     [
+            //         { text: "OK", onPress: () => {} }
+            //     ]
+            // );
+        }
     } catch (error) {
         //if error close the progress bar
         updateState('show_download_bar', false, true);

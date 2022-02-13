@@ -9,7 +9,7 @@ const ImageLoader = (props) => {
     const Style = useStyle();
     const {item, index} = props;
     const {showBtn, setShowBtn} = showDownloadBtnHook(index);
-    
+
     return (
         <TouchableOpacity style={Style.container} activeOpacity={0.9} onPress={() => setShowBtn(!showBtn)}>
             <Image 

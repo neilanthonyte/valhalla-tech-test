@@ -5,7 +5,7 @@ const useStyle = () => {
         container: {
             flex: 1,
             justifyContent: 'flex-start',
-            alignItems: 'center'
+            alignItems: 'center',
         },
         no_data_container: {
             flex: 1,
